@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Merel | Stranger Pentester</title>
+
+    
+    <!-- Three.js para efectos 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP para animaciones avanzadas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/TextPlugin.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts Stranger Things -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+</head>
+<body class="stranger-theme">
+    <!-- Overlay de glitch -->
+    <div class="glitch-overlay"></div>
+    
+    <!-- Efecto de neblina -->
+    <div class="fog-overlay"></div>
+    
+    <!-- Scanlines overlay -->
+    <div class="scanlines"></div>
+    
+    <!-- Terminal flotante -->
+    <div class="floating-terminal">
+        <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">root@pentester:~</span>
+        </div>
+<div class="terminal-content">
+            <div class="terminal-line">$ whoami</div>
+            <div class="terminal-line">> Jonathan_Merel - Hacker_Etico</div>
+            <div class="terminal-line">$ status --ciberseguridad</div>
+            <div class="terminal-line">> ACTIVO: Pruebas_de_Penetración | Análisis_de_Vulnerabilidades</div>
+     <div class="terminal-line blinking">$ _</div>
+        </div>
+    </div>
+    
+    <!-- Canvas para fondo 3D -->
+    <canvas id="bg-canvas"></canvas>
+    
+    <!-- Matrix rain effect -->
+    <canvas id="matrix-canvas"></canvas>
+    
+    <!-- Navbar Stranger Things -->
+    <nav class="navbar navbar-expand-lg fixed-top stranger-nav">
+        <div class="container">
+            <a class="navbar-brand stranger-logo" href="#">
+                <span class="stranger-text">JONATHAN</span>
+                <span class="merel-text">MEREL</span>
+                <span class="hacker-tag">[PEN_TESTER]</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link stranger-link" href="#home">
+                            <i class="fas fa-terminal"></i> $INICIO
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link stranger-link" href="#about">
+                            <i class="fas fa-user-secret"></i> SOBRE MÍ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link stranger-link" href="#skills">
+                            <i class="fas fa-brain"></i> HABILIDADES
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link stranger-link" href="#projects">
+                            <i class="fas fa-code"></i> PROJECTOS
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link stranger-link" href="#lab">
+                            <i class="fas fa-flask"></i> LAB HACKER
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link stranger-link" href="#contact">
+                            <i class="fas fa-satellite-dish"></i> CONTACTO
+                        </a>
+                    </li>
+                </ul>
+                <div class="social-icons ms-4">
+                    <a href="https://github.com/Jonathanmerel" class="hacker-social" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/jonathan-merel-1747b426a/" class="hacker-social" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://tryhackme.com/p/JonathanMerel" class="hacker-social" aria-label="TryHackMe">
+                        <i class="fas fa-skull-crossbones"></i>
+                    </a>
+                    <a href="https://www.hackthebox.com/home/users/profile/XXXXXX" class="hacker-social" aria-label="HackTheBox">
+                        <i class="fas fa-cube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section Stranger Things -->
+    <section id="home" class="hero-section stranger-hero">
+        <div class="stranger-gate"></div>
+        <div class="stranger-lights"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <div class="glitch-text" data-text="ACCESS GRANTED">
+                        <h1 class="stranger-main-title">
+                            <span class="stranger-glow">STRANGER</span>
+                            <span class="pentester-text">PENTESTER</span>
+                        </h1>
+                    </div>
+                    
+                    <div class="typewriter-container">
+                        <h2 class="hero-subtitle typewriter">
+                            <span class="cursor">$</span> echo "Bienvenido al mundo al revés de la ciberseguridad"
+                        </h2>
+                    </div>
+                    
+                    <p class="hero-description stranger-desc">
+                        Exploro dimensiones digitales, busco vulnerabilidades y aseguro sistemas De <span class="glitch-word" data-text="shadow">sombra</span>  Amenazas. Especializada en pruebas de penetración, red teaming y hacking ético.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn stranger-btn primary">
+                            <i class="fas fa-radiation"></i> EXPLORARAR MIS HACKS
+                        </a>
+                        <a href="#contact" class="btn stranger-btn outline">
+                            <i class="fas fa-satellite"></i> INICIAR CONTACTO
+                        </a>
+                    </div>
+                    
+                    <div class="hacker-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="54">0</div>
+                            <div class="stat-label">VULNERABILIDADES ENCONTRADAS</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="18">0</div>
+                            <div class="stat-label">PENTESTS COMPLETADOS</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="4">0</div>
+                            <div class="stat-label">CERTIFICATIONS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="stranger-portrait">
+                        <div class="portrait-frame">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                                 alt="Hacker Portrait" class="portrait-img">
+                            <div class="portrait-overlay"></div>
+                            <div class="portrait-scan"></div>
+                        </div>
+                        <div class="portrait-badge">
+                            <span class="badge-text">ETHICAL HACKER</span>
+                            <span class="badge-glow"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-text">DESPLAZA PARA ENTRAR AL LABv</div>
+            <div class="scroll-bar">
+                <div class="scroll-progress"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section stranger-about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title stranger-title">
+                    <span class="title-number">01</span>
+                    <span class="title-text">QUIÉN SOY</span>
+                    <span class="title-line"></span>
+                </h2>
+                <div class="section-subtitle">// ANÁLISIS DE PERFIL DE USUARIO</div>
+            </div>
+            
+            <div class="about-grid">
+                <div class="about-card card-glitch">
+                    <div class="card-header">
+                        <i class="fas fa-user-secret"></i>
+                        <h3>EL PENTESTER</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>No solo encuentro vulnerabilidades, pienso como el atacante. Mi enfoque combina 
+                        experiencia técnica con resolución creativa de problemas para descubrir debilidades ocultas.</p>
+                        <div class="hacker-quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>"Para defender un sistema, primero debes aprender a romperlo."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-card card-glitch">
+                    <div class="card-header">
+                        <i class="fas fa-biohazard"></i>
+                        <h3>OPERADOR RED</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Simulando ataques del mundo real para probar defensas organizacionales. Me especializo en 
+                        penetración de red, pruebas de aplicaciones web y evaluaciones de ingeniería social.</p>
+                        <ul class="hacker-list">
+                            <li>Certificado OSCP</li>
+                            <li>Certificado CEH</li>
+                            <li>Experto en Seguridad de Red</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="about-card card-glitch">
+                    <div class="card-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>INVESTIGADOR DE SEGURIDAD</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Constantemente aprendiendo y experimentando con nuevos vectores de ataque y mecanismos de defensa. 
+                        Contribuyo a comunidades de seguridad y desarrollo herramientas personalizadas para pruebas de penetración.</p>
+                        <div class="research-tags">
+                            <span>Desarrollo de Exploits</span>
+                            <span>Ingeniería Inversa</span>
+                            <span>Análisis de Malware</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="section stranger-skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title stranger-title">
+                    <span class="title-number">02</span>
+                    <span class="title-text">MI ARSENAL</span>
+                    <span class="title-line"></span>
+                </h2>
+                <div class="section-subtitle">// KIT DE HERRAMIENTAS DE PENTESTING</div>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <!-- Skill 1 -->
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fab fa-linux"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h4>Linux & Sistemas</h4>
+                            <p>Kali, Parrot, Ubuntu, CentOS</p>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-level="95"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 2 -->
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h4>Pentesting de Red</h4>
+                            <p>Nmap, Wireshark, Metasploit</p>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-level="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 3 -->
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h4>Aplicaciones Web</h4>
+                            <p>Burp Suite, OWASP Top 10, SQLi</p>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-level="88"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 4 -->
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h4>Scripting & Automatización</h4>
+                            <p>Python, Bash, PowerShell</p>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-level="92"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 5 -->
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-user-ninja"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h4>Ingeniería Social</h4>
+                            <p>Phishing, OSINT, SEToolkit</p>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-level="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill 6 -->
+                    <div class="skill-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="skill-content">
+                            <h4>Forensia & Análisis</h4>
+                            <p>Autopsy, Volatility, FTK</p>
+                            <div class="skill-meter">
+                                <div class="skill-progress" data-level="82"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tools-showcase">
+                    <h3>Herramientas Favoritas</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item" data-tool="Kali Linux">
+                            <i class="fas fa-skull"></i>
+                            <span>Kali</span>
+                        </div>
+                        <div class="tool-item" data-tool="Metasploit">
+                            <i class="fas fa-crosshairs"></i>
+                            <span>Metasploit</span>
+                        </div>
+                        <div class="tool-item" data-tool="Burp Suite">
+                            <i class="fas fa-spider"></i>
+                            <span>Burp</span>
+                        </div>
+                        <div class="tool-item" data-tool="Nmap">
+                            <i class="fas fa-search"></i>
+                            <span>Nmap</span>
+                        </div>
+                        <div class="tool-item" data-tool="Wireshark">
+                            <i class="fas fa-eye"></i>
+                            <span>Wireshark</span>
+                        </div>
+                        <div class="tool-item" data-tool="John the Ripper">
+                            <i class="fas fa-key"></i>
+                            <span>John</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="section stranger-projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title stranger-title">
+                    <span class="title-number">03</span>
+                    <span class="title-text">OPERACIONES</span>
+                    <span class="title-line"></span>
+                </h2>
+                <div class="section-subtitle">// PRUEBAS DE PENETRACIÓN EXITOSAS</div>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card stranger-card">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    
+                    <div class="project-header">
+                        <span class="project-category">PENTEST WEB APP</span>
+                        <span class="project-status success">ÉXITO</span>
+                    </div>
+                    
+                    <h3 class="project-title">AUDITORÍA DE SEGURIDAD E-COMMERCE</h3>
+                    <p class="project-description">
+                        CPrueba de penetración completa en una plataforma importante de comercio electrónico. 
+                        Descubrí 15 vulnerabilidades críticas incluyendo inyección SQL 
+                        y fallos de escalación de privilegios.
+                    </p>
+                    
+                    <div class="project-tags">
+                        <span>Inyección SQL</span>
+                        <span>XSS</span>
+                        <span>CSRF</span>
+                        <span>Bypass de Autenticación</span>
+                    </div>
+                    
+                    <div class="project-footer">
+                        <div class="severity-level">
+                            <span class="severity-dot critical"></span>
+                            <span>HALLADOS CRÍTICOS: 5</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> VER REPORTE
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card stranger-card">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    
+                    <div class="project-header">
+                        <span class="project-category">PENTEST DE RED</span>
+                        <span class="project-status success">ÉXITO</span>
+                    </div>
+                    
+                    <h3 class="project-title">EVALUACIÓN DE RED CORPORATIVA</h3>
+                    <p class="project-description">
+                         Prueba de penetración completa de red para una empresa Fortune 500. 
+                        Obtuve acceso de administrador de dominio a través de múltiples vectores de ataque 
+                        y técnicas de movimiento lateral.
+                    </p>
+                    
+                    <div class="project-tags">
+                        <span>Active Directory</span>
+                        <span>Movimiento Lateral</span>
+                        <span>Escalación de Privilegios</span>
+                        <span>Pivoting</span>
+                    </div>
+                    
+                    <div class="project-footer">
+                        <div class="severity-level">
+                            <span class="severity-dot high"></span>
+                            <span>HALLADOS ALTOS: 8</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>  VER REPORTE
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card stranger-card">
+                    <div class="card-corner tl"></div>
+                    <div class="card-corner tr"></div>
+                    <div class="card-corner bl"></div>
+                    <div class="card-corner br"></div>
+                    
+                    <div class="project-header">
+                        <span class="project-category">PENTEST APP MÓVIL</span>
+                        <span class="project-status success">ÉXITO</span>
+                    </div>
+                    
+                    <h3 class="project-title">REVISIÓN DE SEGURIDAD APP BANCARIA</h3>
+                    <p class="project-description">
+                        Evaluación de seguridad de una aplicación móvil bancaria. 
+                        Identifiqué almacenamiento inseguro de datos, criptografía rota 
+                        y vulnerabilidades de inyección del lado del cliente.
+                    </p>
+                    
+                    <div class="project-tags">
+                        <span>Ingeniería Inversa</span>
+                        <span>Bypass SSL Pinning</span>
+                        <span>Almacenamiento Inseguro</span>
+                        <span>Análisis de Código</span>
+                    </div>
+                    
+                    <div class="project-footer">
+                        <div class="severity-level">
+                            <span class="severity-dot medium"></span>
+                            <span>HALLADOS MEDIOS: 12</span>
+                        </div>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i> VER REPORTE
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hacker Lab Section -->
+    <section id="lab" class="section stranger-lab">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title stranger-title">
+                    <span class="title-number">04</span>
+                    <span class="title-text">LAB HACKER</span>
+                    <span class="title-line"></span>
+                </h2>
+                <div class="section-subtitle">//  DEMOSTRACIONES EN VIVO & HERRAMIENTAS</div>
+            </div>
+            
+            <div class="lab-container">
+                <div class="lab-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <span class="terminal-dot red"></span>
+                            <span class="terminal-dot yellow"></span>
+                            <span class="terminal-dot green"></span>
+                            <span class="terminal-title">hacker_lab@stranger:~</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-output">
+                                <p>> Inicializando suite de pruebas de penetración...</p>
+                                <p>> Cargando base de datos de exploits...</p>
+                                <p>> Escaneando vulnerabilidades...</p>
+                                <p class="blinking">> Listo para comandos...</p>
+                            </div>
+                            <div class="terminal-input">
+                                <span class="prompt">$</span>
+                                <input type="text" class="command-input" placeholder="Type 'help' for commands" id="hackerInput">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-controls">
+                        <button class="lab-btn" data-command="scan">
+                            <i class="fas fa-search"></i> ESCANEAR RED
+                        </button>
+                        <button class="lab-btn" data-command="exploit">
+                            <i class="fas fa-bug"></i> EJECUTAR EXPLOIT
+                        </button>
+                        <button class="lab-btn" data-command="decode">
+                            <i class="fas fa-key"></i> DECODIFICAR HASH
+                        </button>
+                        <button class="lab-btn" data-command="report">
+                            <i class="fas fa-file-alt"></i> GENERAR REPORTE
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="lab-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>RANKING CTF</h4>
+                            <div class="stat-value">TOP 5%</div>
+                            <p>Posición global en competencias de seguridad</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>RECOMPENSAS</h4>
+                            <div class="stat-value">$25,000+</div>
+                            <p>Ganancias de bug bounties</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h4>TIEMPO DE RESPUESTA</h4>
+                            <div class="stat-value">24/7</div>
+                            <p>Disponible para incidentes de emergencia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva Sección: Mando de Seguridad en Tiempo Real -->
+<section id="command-center" class="section stranger-command">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title stranger-title">
+                <span class="title-number">06</span>
+                <span class="title-text">CENTRO DE MANDO</span>
+                <span class="title-line"></span>
+            </h2>
+            <div class="section-subtitle">// MONITOREO DE AMENAZAS EN TIEMPO REAL</div>
+        </div>
+        
+        <div class="command-grid">
+            <!-- Panel Izquierdo: Métricas en Tiempo Real -->
+            <div class="metrics-panel">
+                <h3><i class="fas fa-tachometer-alt"></i> MÉTRICAS EN VIVO</h3>
+                <div class="metric-row">
+                    <div class="metric">
+                        <div class="metric-value" id="threats-blocked">0</div>
+                        <div class="metric-label">AMENAZAS BLOQUEADAS</div>
+                        <div class="metric-trend up"></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value" id="active-threats">0</div>
+                        <div class="metric-label">AMENAZAS ACTIVAS</div>
+                        <div class="metric-trend down"></div>
+                    </div>
+                </div>
+                
+                <div class="threat-feed">
+                    <h4><i class="fas fa-rss"></i> FEED DE AMENAZAS</h4>
+                    <div class="feed-container" id="threat-feed">
+                        <!-- Las amenazas se cargan dinámicamente -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Panel Central: Herramientas de Análisis -->
+            <div class="analysis-panel">
+                <h3><i class="fas fa-search"></i> HERRAMIENTAS DE ANÁLISIS</h3>
+                
+                <!-- Herramienta 1: Analizador de IP -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-network-wired"></i>
+                        <h4>ANALIZADOR DE IP</h4>
+                    </div>
+                    <input type="text" id="ip-input" placeholder="192.168.1.1" class="tool-input">
+                    <button onclick="analyzeIP()" class="stranger-btn primary">
+                        <i class="fas fa-play"></i> ANALIZAR
+                    </button>
+                </div>
+
+                <!-- Herramienta 2: Detector de Phishing -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-fish"></i>
+                        <h4>DETECTOR DE PHISHING</h4>
+                    </div>
+                    <input type="text" id="url-input" placeholder="https://ejemplo-sospechoso.com" class="tool-input">
+                    <button onclick="analyzeURL()" class="stranger-btn danger">
+                        <i class="fas fa-shield-alt"></i> VERIFICAR
+                    </button>
+                    <div id="url-results" class="results-panel"></div>
+                </div>
+                
+                <!-- Herramienta 3: Verificador de Contraseñas -->
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-key"></i>
+                        <h4>VERIFICADOR DE CONTRASEÑAS</h4>
+                    </div>
+                    <input type="password" id="password-input" placeholder="Tu contraseña" class="tool-input">
+                    <button onclick="checkPassword()" class="stranger-btn warning">
+                        <i class="fas fa-lock"></i> VERIFICAR
+                    </button>
+                    <div id="password-results" class="results-panel"></div>
+                </div>
+            </div>
+            
+            <!-- Panel Derecho: Dashboard de Amenazas -->
+            <div class="threat-dashboard">
+                <h3><i class="fas fa-radar"></i> MAPA DE AMENAZAS</h3>
+                <div class="world-map" id="threat-map">
+                    <!-- Mapa SVG interactivo con amenazas -->
+                </div>
+                
+                <div class="threat-stats">
+                    <h4>ESTADÍSTICAS GLOBALES</h4>
+                    <div class="stat-item">
+                        <span class="stat-label">PHISHING ACTIVO:</span>
+                        <span class="stat-value" id="phishing-count">1,234</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">MALWARE NUEVO:</span>
+                        <span class="stat-value" id="malware-count">567</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">IPS MALICIOSAS:</span>
+                        <span class="stat-value" id="bad-ips">8,901</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Log de Actividad -->
+        <div class="activity-log">
+            <h3><i class="fas fa-terminal"></i> LOG DE ACTIVIDAD</h3>
+            <div class="log-container" id="activity-log">
+                <!-- Log en tiempo real -->
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section stranger-contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title stranger-title">
+                    <span class="title-number">05</span>
+                    <span class="title-text">CONTACTO ENCRIPTADO</span>
+                    <span class="title-line"></span>
+                </h2>
+                <div class="section-subtitle">// CANAL DE COMUNICACIÓN SEGURO</div>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form-container">
+                    <div class="form-header">
+                        <h3>Enviar Mensaje Encriptado</h3>
+                        <div class="encryption-status">
+                            <span class="encryption-dot"></span>
+                            <span>Conexión Segura (AES-256)</span>
+                        </div>
+                    </div>
+                    
+                    <form id="encryptedForm" class="stranger-form">
+                        <div class="form-group">
+                            <label for="senderName">
+                                <i class="fas fa-user"></i>  Tu Alias
+                            </label>
+                            <input type="text" id="senderName" class="form-input" placeholder="Enter your handle" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="senderEmail">
+                                <i class="fas fa-envelope"></i> Email Seguro
+                            </label>
+                            <input type="email" id="senderEmail" class="form-input" placeholder="user@secure.domain" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="messageType">
+                                <i class="fas fa-folder"></i> Tipo de Mensaje
+                            </label>
+                            <select id="messageType" class="form-input">
+                                <option value="pentest">Solicitud de Pentest</option>
+                                <option value="consulting">Consultoría de Seguridad</option>
+                                <option value="bug">Reporte de Bug</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="encryptedMessage">
+                                <i class="fas fa-lock"></i> ENVIAR ENCRIPTADO
+                            </label>
+                            <textarea id="encryptedMessage" class="form-input" rows="5" 
+                                      placeholder="Escribe tu mensaje seguro aquí..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="stranger-btn primary send-btn">
+                            <i class="fas fa-paper-plane"></i> ENVIAR ENCRIPTADO
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-header">
+                            <i class="fas fa-satellite-dish"></i>
+                            <h4>Canales Alternativos</h4>
+                        </div>
+                        <div class="info-content">
+                            <div class="contact-method">
+                                <i class="fab fa-keybase"></i>
+                                <div>
+                                    <h5>Keybase</h5>
+                                    <p>@jonathanmerel</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <i class="fab fa-telegram"></i>
+                                <div>
+                                    <h5>Telegram</h5>
+                                    <p>@stranger_pentester</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <i class="fas fa-envelope-open-text"></i>
+                                <div>
+                                    <h5>PGP Key</h5>
+                                    <p class="pgp-key">0xABCD1234EFGH5678</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-box">
+                        <h4>Solicitud de Pentest?</h4>
+                        <p>Consultoría de Seguridad.</p>
+                        <a href="#contact" class="stranger-btn outline cta-btn">
+                            <i class="fas fa-shield-alt"></i> Mensaje Encriptado
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="stranger-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">JONATHAN MEREL</h3>
+                    <p class="footer-tagline">ETHICAL HACKER & SECURITY RESEARCHER</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home Base</a></li>
+                        <li><a href="#about">Profile</a></li>
+                        <li><a href="#skills">Skills Matrix</a></li>
+                        <li><a href="#projects">Operations</a></li>
+                        <li><a href="#lab">Hacker Lab</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-legal">
+                    <h4>Legal & Ethics</h4>
+                    <ul>
+                        <li><a href="#">Code of Ethics</a></li>
+                        <li><a href="#">Responsible Disclosure</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                    <div class="disclaimer">
+                        <p><i class="fas fa-exclamation-triangle"></i> All activities conducted ethically and legally</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2024 Jonathan Merel. All rights reserved. | Designed with <i class="fas fa-heart"></i> for the cybersecurity community
+                </div>
+                <div class="hacker-note">
+                    <i class="fas fa-terminal"></i> Stay curious. Stay secure.
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
